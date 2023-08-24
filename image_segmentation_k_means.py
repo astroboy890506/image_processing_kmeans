@@ -57,11 +57,11 @@ def main():
         image_width = st.slider("Adjust Image Width", min_value=100, max_value=800, value=500)
 
         st.subheader("Original Image")
-        st.image(cv2.cvtColor(original_img, cv2.COLOR_BGR2RGB), use_column_width=True, width=image_width)
+        st.image(cv2.cvtColor(original_img, cv2.COLOR_BGR2RGB), width=image_width)
 
         for i in range(num_clusters):
             st.subheader(f"Cluster {i + 1}")
-            st.image(cv2.cvtColor(segmented_imgs[i], cv2.COLOR_BGR2RGB), use_column_width=True, width=image_width)
+            st.image(cv2.cvtColor(segmented_imgs[i], cv2.COLOR_BGR2RGB), width=image_width)
 
 if __name__ == "__main__":
     main()

@@ -54,23 +54,12 @@ def main():
 
         original_img, segmented_imgs = kmeans_segmentation(img_path, num_clusters)
 
-        # Display the images using Matplotlib
-        fig, axes = plt.subplots(2, num_clusters + 1, figsize=(20, 15))
-        axes = axes.ravel()
-
-        axes[0].imshow(cv2.cvtColor(original_img, cv2.COLOR_BGR2RGB))
-        axes[0].set_title('Original Image')
-        axes[0].axis('off')
+        st.subheader("Original Image")
+        st.image(cv2.cvtColor(original_img, cv2.COLOR_BGR2RGB), use_column_width=True)
 
         for i in range(num_clusters):
-            axes[i + 1].imshow(cv2.cvtColor(segmented_imgs[i], cv2.COLOR_BGR2RGB))
-            axes[i + 1].set_title(f'Cluster {i + 1}')
-            axes[i + 1].axis('off')
-
-        plt.tight_layout()
-        
-        # Display the plot in Streamlit using st.pyplot(fig)
-        st.pyplot(fig)
+            st.subheader(f"Cluster {i + 1}")
+            st.image(cv2.cvtColor(segmented_imgs[i], cv2.COLOR_BGR2RGB), use_column_width=True)
 
 if __name__ == "__main__":
     main()

@@ -34,17 +34,7 @@ def kmeans_segmentation(img_path, num_clusters):
     return img, segmented_imgs
 
 def main():
-    st.set_page_config(
-        page_title="Image Segmentation App",
-        page_icon=":camera:",
-        layout="centered",
-        initial_sidebar_state="expanded"
-    )
-
-    st.title("Image Segmentation using K-Means")
-
-    # Upload an image from the user's local PC
-    uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
+    # Rest of your code
 
     if uploaded_file is not None:
         num_clusters = st.slider("Number of Clusters (k)", min_value=2, max_value=10, value=5)
@@ -70,7 +60,8 @@ def main():
             plt.axis('off')
 
         plt.tight_layout()  # Automatically adjust subplot spacing
-        st.pyplot()
+        fig = plt.gcf()  # Get the current figure
+        st.pyplot(fig)    # Pass the figure to st.pyplot()
 
 if __name__ == "__main__":
     main()

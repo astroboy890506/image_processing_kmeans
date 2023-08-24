@@ -43,7 +43,6 @@ def main():
 
     st.title("Image Segmentation using K-Means")
 
-    # Upload an image from the user's local PC
     uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
 
     if uploaded_file is not None:
@@ -55,22 +54,23 @@ def main():
 
         original_img, segmented_imgs = kmeans_segmentation(img_path, num_clusters)
 
-        # Display the original image and segmented images
-        plt.figure(figsize=(20, 15))  # Increase the figure size
+        # Display the images using Matplotlib
+        fig, axes = plt.subplots(2, num_clusters + 1, figsize=(20, 15))
+        axes = axes.ravel()
 
-        plt.subplot(2, num_clusters + 1, 1)  # Adjust the subplot layout
-        plt.imshow(cv2.cvtColor(original_img, cv2.COLOR_BGR2RGB))
-        plt.title('Original Image')
-        plt.axis('off')
+        axes[0].imshow(cv2.cvtColor(original_img, cv2.COLOR_BGR2RGB))
+        axes[0].set_title('Original Image')
+        axes[0].axis('off')
 
         for i in range(num_clusters):
-            plt.subplot(2, num_clusters + 1, i + 2)  # Adjust the subplot layout
-            plt.imshow(cv2.cvtColor(segmented_imgs[i], cv2.COLOR_BGR2RGB))
-            plt.title(f'Cluster {i + 1}')
-            plt.axis('off')
+            axes[i + 1].imshow(cv2.cvtColor(segmented_imgs[i], cv2.COLOR_BGR2RGB))
+            axes[i + 1].set_title(f'Cluster {i + 1}')
+            axes[i + 1].axis('off')
 
-        plt.tight_layout()  # Automatically adjust subplot spacing
-        st.pyplot()
+        plt.tight_layout()
+        
+        # Display the plot in Streamlit using st.pyplot(fig)
+        st.pyplot(fig)
 
 if __name__ == "__main__":
     main()

@@ -59,9 +59,18 @@ def main():
         st.subheader("Original Image")
         st.image(cv2.cvtColor(original_img, cv2.COLOR_BGR2RGB), width=image_width)
 
+        col1, col2 = st.beta_columns(2)
+
         for i in range(num_clusters):
-            st.subheader(f"Cluster {i + 1}")
-            st.image(cv2.cvtColor(segmented_imgs[i], cv2.COLOR_BGR2RGB), width=image_width)
+            with col1:
+                st.subheader(f"Cluster {i + 1}")
+                st.image(cv2.cvtColor(segmented_imgs[i], cv2.COLOR_BGR2RGB), width=image_width)
+
+            if i + 1 < num_clusters:  # Add a check to avoid IndexError
+                with col2:
+                    st.subheader(f"Cluster {i + 2}")
+                    st.image(cv2.cvtColor(segmented_imgs[i + 1], cv2.COLOR_BGR2RGB), width=image_width)
+                i += 1
 
 if __name__ == "__main__":
     main()

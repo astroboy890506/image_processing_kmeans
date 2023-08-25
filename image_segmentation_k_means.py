@@ -59,7 +59,7 @@ def main():
         st.subheader("Original Image")
         st.image(cv2.cvtColor(original_img, cv2.COLOR_BGR2RGB), width=image_width)
 
-        col1, col2 = st.beta_columns(2)
+        col1, col2 = st.columns(2)
 
         for i in range(num_clusters):
             if i % 2 == 0:

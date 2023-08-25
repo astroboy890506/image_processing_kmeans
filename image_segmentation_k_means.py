@@ -54,7 +54,7 @@ def main():
 
         original_img, segmented_imgs = kmeans_segmentation(img_path, num_clusters)
 
-        image_width = st.slider("Adjust Image Width", min_value=100, max_value=800, value=500)
+        image_width = st.slider("Adjust Image Width", min_value=100, max_value=350, value=350)
 
         st.subheader("Original Image")
         st.image(cv2.cvtColor(original_img, cv2.COLOR_BGR2RGB), width=image_width)

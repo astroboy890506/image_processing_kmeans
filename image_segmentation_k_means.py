@@ -37,8 +37,7 @@ def main():
     st.set_page_config(
         page_title="Image Segmentation App",
         page_icon=":camera:",
-        layout="centered",
-        initial_sidebar_state="expanded"
+        layout="wide"  # Set layout to wide for better placement of widgets
     )
 
     st.title("Image Segmentation using K-Means")
@@ -46,7 +45,7 @@ def main():
     uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
 
     if uploaded_file is not None:
-        num_clusters = st.slider("Number of Clusters (k)", min_value=2, max_value=10, value=5)
+        num_clusters = st.sidebar.slider("Number of Clusters (k)", min_value=2, max_value=10, value=5)
 
         img_path = "uploaded_image.jpg"
         with open(img_path, "wb") as f:
@@ -54,10 +53,10 @@ def main():
 
         original_img, segmented_imgs = kmeans_segmentation(img_path, num_clusters)
 
-        image_width = st.slider("Adjust Image Width", min_value=100, max_value=350, value=350)
+        image_width = st.sidebar.slider("Adjust Image Width", min_value=100, max_value=350, value=350)
 
-        st.subheader("Original Image")
-        st.image(cv2.cvtColor(original_img, cv2.COLOR_BGR2RGB), width=image_width)
+        st.sidebar.subheader("Original Image")
+        st.sidebar.image(cv2.cvtColor(original_img, cv2.COLOR_BGR2RGB), width=image_width)
 
         col1, col2 = st.columns(2)
 
